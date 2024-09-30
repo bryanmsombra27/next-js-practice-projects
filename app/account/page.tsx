@@ -8,7 +8,13 @@ export const metadata: Metadata = {
 
 interface pageProps {}
 const page: FC<pageProps> = ({}) => {
-  return <h1>Component</h1>;
+  return (
+    <>
+      <h2 className="font-semibold text-2xl text-accent-400 mb-7">
+        Welcome Bryan
+      </h2>
+    </>
+  );
 };
 
 export default page;
