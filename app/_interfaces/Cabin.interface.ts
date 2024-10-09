@@ -1,8 +1,10 @@
 export interface Cabin {
-  id: string;
+  id: number;
   name: string;
   maxCapacity: number;
   regularPrice: number;
   discount: number;
   image: string;
+  description?: string;
+  created_at?: string;
 }

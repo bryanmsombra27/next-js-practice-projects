@@ -1,17 +1,14 @@
 import { Metadata } from "next";
-import { FC } from "react";
-import CabinCard from "@/app/_components/CabinCard";
-import { Cabin } from "@/app/_interfaces/Cabin.interface";
+import { FC, Suspense } from "react";
+import CabinList from "../_components/CabinList";
+import Spinner from "../_components/Spinner";
 export const metadata: Metadata = {
   title: "Cabins",
   description: "",
 };
 
 interface pageProps {}
-const page: FC<pageProps> = async ({}) => {
-  // CHANGE
-  const cabins: Cabin[] = [];
-
+const page: FC<pageProps> = ({}) => {
   return (
     <div>
       <h1 className="text-4xl mb-5 text-accent-400 font-medium">
@@ -26,16 +23,9 @@ const page: FC<pageProps> = async ({}) => {
         to paradise.
       </p>
 
-      {cabins.length > 0 && (
-        <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 xl:gap-14">
-          {cabins.map((cabin) => (
-            <CabinCard
-              cabin={cabin}
-              key={cabin.id}
-            />
-          ))}
-        </div>
-      )}
+      <Suspense fallback={<Spinner />}>
+        <CabinList />
+      </Suspense>
     </div>
   );
 };
