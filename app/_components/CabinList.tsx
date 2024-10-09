@@ -2,9 +2,12 @@ import { FC } from "react";
 import CabinCard from "@/app/_components/CabinCard";
 import { Cabin } from "../_interfaces/Cabin.interface";
 import { getCabins } from "../_lib/data-service";
+import { unstable_noStore as noStore } from "next/cache";
 
 interface CabinListProps {}
 const CabinList: FC<CabinListProps> = async ({}) => {
+  // noStore();
+
   // CHANGE
   const cabins: Cabin[] = await getCabins();
 

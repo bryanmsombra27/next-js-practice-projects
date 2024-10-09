@@ -6,6 +6,8 @@ export const metadata: Metadata = {
   title: "Cabins",
   description: "",
 };
+// REVALIDATION AT ROUTE LEVEL
+// export const revalidate = 3600;
 
 interface pageProps {}
 const page: FC<pageProps> = ({}) => {

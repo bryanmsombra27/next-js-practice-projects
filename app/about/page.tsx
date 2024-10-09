@@ -3,14 +3,19 @@ import Image from "next/image";
 import { FC } from "react";
 import about1 from "@/public/about-1.jpg";
 import Link from "next/link";
+import { getCabins } from "../_lib/data-service";
 
 export const metadata: Metadata = {
   title: "About",
   description: "",
 };
+export const revalidate = 86400;
 
 interface pageProps {}
-const page: FC<pageProps> = ({}) => {
+
+const page: FC<pageProps> = async ({}) => {
+  const cabins = await getCabins();
+
   return (
     <div className="grid grid-cols-5 gap-x-24 gap-y-32 text-lg items-center">
       <div className="col-span-3">
@@ -27,10 +32,10 @@ const page: FC<pageProps> = ({}) => {
             simple pleasures with family.
           </p>
           <p>
-            Our 8 luxury cabins provide a cozy base, but the real freedom and
-            peace you'll find in the surrounding mountains. Wander through lush
-            forests, breathe in the fresh air, and watch the stars twinkle above
-            from the warmth of a campfire or your hot tub.
+            Our {cabins.length} luxury cabins provide a cozy base, but the real
+            freedom and peace you'll find in the surrounding mountains. Wander
+            through lush forests, breathe in the fresh air, and watch the stars
+            twinkle above from the warmth of a campfire or your hot tub.
           </p>
           <p>
             This is where memorable moments are made, surrounded by nature's
