@@ -8,6 +8,7 @@ const josefin = Josefin_Sans({
 
 import "@/app/_styles/globals.css";
 import Header from "@/app/_components/Header";
+import { ReservationContextProvider } from "./ReservationContext";
 
 export const metadata: Metadata = {
   // title: "The Wild Oasis",
@@ -31,7 +32,9 @@ export default function RootLayout({
       >
         <Header />
         <div className="flex-1 px-8 py-12 grid">
-          <main className="max-w-7xl  mx-auto w-full">{children}</main>
+          <main className="max-w-7xl  mx-auto w-full">
+            <ReservationContextProvider>{children}</ReservationContextProvider>
+          </main>
         </div>
       </body>
     </html>

@@ -2,6 +2,8 @@ import { Metadata } from "next";
 import { FC, Suspense } from "react";
 import CabinList from "../_components/CabinList";
 import Spinner from "../_components/Spinner";
+import Filter from "../_components/Filter";
+import ReservationReminder from "../_components/ReservationReminder";
 export const metadata: Metadata = {
   title: "Cabins",
   description: "",
@@ -9,8 +11,14 @@ export const metadata: Metadata = {
 // REVALIDATION AT ROUTE LEVEL
 // export const revalidate = 3600;
 
-interface pageProps {}
-const page: FC<pageProps> = ({}) => {
+interface pageProps {
+  searchParams: {
+    capacity: string;
+  };
+}
+const page: FC<pageProps> = ({ searchParams }) => {
+  const filter = searchParams?.capacity ?? "all";
+
   return (
     <div>
       <h1 className="text-4xl mb-5 text-accent-400 font-medium">
@@ -24,9 +32,16 @@ const page: FC<pageProps> = ({}) => {
         away from home. The perfect spot for a peaceful, calm vacation. Welcome
         to paradise.
       </p>
+      <div className="flex justify-end mb-8">
+        <Filter />
+      </div>
 
-      <Suspense fallback={<Spinner />}>
-        <CabinList />
+      <Suspense
+        fallback={<Spinner />}
+        key={filter}
+      >
+        <CabinList filter={filter} />
+        <ReservationReminder />
       </Suspense>
     </div>
   );

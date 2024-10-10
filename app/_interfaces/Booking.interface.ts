@@ -15,3 +15,7 @@ export interface Booking {
     image: string;
   };
 }
+export interface BookedDates {
+  start: string;
+  end: string;
+}

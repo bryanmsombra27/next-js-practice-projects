@@ -3,6 +3,8 @@ import { Countries } from "../_interfaces/Countries.interface";
 import supabase from "./supabase";
 import { Cabin } from "../_interfaces/Cabin.interface";
 import { notFound } from "next/navigation";
+import { Setting } from "../_interfaces/Settings.interface";
+import { BookedDates, Booking } from "../_interfaces/Booking.interface";
 
 /////////////
 // GET
@@ -98,7 +100,9 @@ export async function getBookings(guestId: number) {
   return data;
 }
 
-export async function getBookedDatesByCabinId(cabinId: number) {
+export async function getBookedDatesByCabinId(
+  cabinId: number
+): Promise<Date[]> {
   let today = new Date();
   today.setUTCHours(0, 0, 0, 0);
   today = today.toISOString() as any;
@@ -128,7 +132,7 @@ export async function getBookedDatesByCabinId(cabinId: number) {
   return bookedDates;
 }
 
-export async function getSettings() {
+export async function getSettings(): Promise<Setting> {
   const { data, error } = await supabase.from("settings").select("*").single();
 
   if (error) {
