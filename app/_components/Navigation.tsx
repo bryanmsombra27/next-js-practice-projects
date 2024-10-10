@@ -1,8 +1,11 @@
 import Link from "next/link";
 import { FC } from "react";
+import { auth } from "../_lib/auth";
 
 interface NavigationProps {}
-const Navigation: FC<NavigationProps> = ({}) => {
+const Navigation: FC<NavigationProps> = async ({}) => {
+  const session = await auth();
+
   return (
     <nav className="z-10 text-xl">
       <ul className="flex gap-16 items-center">
@@ -23,12 +26,27 @@ const Navigation: FC<NavigationProps> = ({}) => {
           </Link>
         </li>
         <li>
-          <Link
-            href="/account"
-            className="hover:text-accent-400 transition-colors"
-          >
-            Guest area
-          </Link>
+          {session?.user?.image ? (
+            <Link
+              href="/account"
+              className="hover:text-accent-400 transition-colors flex items-center gap-4"
+            >
+              <img
+                src={session.user.image}
+                alt="avatar"
+                className="h-8 rounded-full "
+                referrerPolicy="no-referrer"
+              />
+              <span>Guest area</span>
+            </Link>
+          ) : (
+            <Link
+              href="/account"
+              className="hover:text-accent-400 transition-colors"
+            >
+              Guest area
+            </Link>
+          )}
         </li>
       </ul>
     </nav>

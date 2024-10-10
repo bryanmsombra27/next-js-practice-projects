@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { FC } from "react";
+import { auth } from "../_lib/auth";
 
 export const metadata: Metadata = {
   title: "Guests Area",
@@ -7,11 +8,13 @@ export const metadata: Metadata = {
 };
 
 interface pageProps {}
-const page: FC<pageProps> = ({}) => {
+const page: FC<pageProps> = async ({}) => {
+  const session = await auth();
+
   return (
     <>
       <h2 className="font-semibold text-2xl text-accent-400 mb-7">
-        Welcome Bryan
+        Welcome {session?.user?.name}
       </h2>
     </>
   );
