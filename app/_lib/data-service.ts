@@ -5,6 +5,7 @@ import { Cabin } from "../_interfaces/Cabin.interface";
 import { notFound } from "next/navigation";
 import { Setting } from "../_interfaces/Settings.interface";
 import { BookedDates, Booking } from "../_interfaces/Booking.interface";
+import { Guest } from "../_interfaces/Guest.interface";
 
 /////////////
 // GET
@@ -56,7 +57,7 @@ export const getCabins = async function (): Promise<Cabin[]> {
 };
 
 // Guests are uniquely identified by their email address
-export async function getGuest(email: string) {
+export async function getGuest(email: string): Promise<Guest> {
   const { data, error } = await supabase
     .from("guests")
     .select("*")
@@ -82,7 +83,7 @@ export async function getBooking(id: number) {
   return data;
 }
 
-export async function getBookings(guestId: number) {
+export async function getBookings(guestId: number): Promise<Booking[]> {
   const { data, error, count } = await supabase
     .from("bookings")
     // We actually also need data on the cabins as well. But let's ONLY take the data that we actually need, in order to reduce downloaded data.
@@ -97,7 +98,7 @@ export async function getBookings(guestId: number) {
     throw new Error("Bookings could not get loaded");
   }
 
-  return data;
+  return data as any;
 }
 
 export async function getBookedDatesByCabinId(
