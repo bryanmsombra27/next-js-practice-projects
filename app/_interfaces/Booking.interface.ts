@@ -21,3 +21,12 @@ export interface BookedDates {
   start: string;
   end: string;
 }
+
+export interface BookingDraft {
+  guestId?: string;
+  startDate: Date;
+  endDate: Date;
+  numNights: number;
+  cabinId: number;
+  totalPrice: number;
+}

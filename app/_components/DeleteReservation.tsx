@@ -7,14 +7,15 @@ import SpinnerMini from "./SpinnerMini";
 
 interface DeleteReservationProps {
   bookingId: number;
+  onDelete: (bookingId: number) => void;
 }
 
-function DeleteReservation({ bookingId }: DeleteReservationProps) {
+function DeleteReservation({ bookingId, onDelete }: DeleteReservationProps) {
   const [isPending, startTransition] = useTransition();
 
   const handleDelete = () => {
     if (confirm("Are you sure you want to delete this reservation?"))
-      startTransition(() => deleteReservation(bookingId));
+      startTransition(() => onDelete(bookingId));
   };
 
   return (
