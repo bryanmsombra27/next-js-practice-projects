@@ -1,7 +1,7 @@
 import { Cabin } from "./Cabin.interface";
 
 export interface Booking {
-  id: string;
+  id: number;
   guestId: string;
   startDate: string;
   endDate: string;
@@ -10,10 +10,12 @@ export interface Booking {
   numGuests: number;
   status: string;
   created_at: string;
+  observations?: string;
   cabins: {
     name: string;
     image: string;
   };
+  cabinId: number;
 }
 export interface BookedDates {
   start: string;
